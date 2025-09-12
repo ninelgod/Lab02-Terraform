@@ -15,7 +15,7 @@ resource "docker_container" "app1" {
 
   ports {
     internal = 80
-    external = 3001
+    external = var.app1_ports_external[terraform.workspace]
   }
 }
 
@@ -38,7 +38,7 @@ resource "docker_container" "app2" {
 
   ports {
     internal = 80
-    external = 3002
+    external = var.app2_ports_external[terraform.workspace]
   }
 }
 
@@ -61,6 +61,6 @@ resource "docker_container" "app3" {
 
   ports {
     internal = 80
-    external = 3003
+    external = var.app3_ports_external[terraform.workspace]
   }
 }
