@@ -9,3 +9,9 @@ variable "app2_ports_external" {
 
 variable "app3_ports_external" {
 }
+
+variable "redis_ports_external" {
+}
+
+variable "postgres_ports_external" {
+}
