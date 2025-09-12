@@ -1,6 +1,6 @@
 resource "docker_container" "redis" {
   name = "redis"
-  image = "redis:latest"
+  image = "redis:8.2.1-bookworm"
   
   networks_advanced {
     name    = docker_network.persistence_net.name
