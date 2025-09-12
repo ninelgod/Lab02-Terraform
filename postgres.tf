@@ -6,11 +6,6 @@ resource "docker_container" "postgres" {
     name    = docker_network.persistence_net.name
     aliases = ["postgres"]
   }
-#en debate si dejamos app_net o no
-  networks_advanced {
-    name    = docker_network.app_net.name
-    aliases = ["postgres"]
-  }
   ports {
     internal = 5432
     external = var.postgres_ports_external[terraform.workspace]
