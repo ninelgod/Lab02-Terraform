@@ -13,7 +13,7 @@ resource "docker_container" "postgres" {
   }
   ports {
     internal = 5432
-    external = 5432
+    external = var.postgres_ports_external[terraform.workspace]
   }
 
   env = [
