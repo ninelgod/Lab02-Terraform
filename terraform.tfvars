@@ -13,3 +13,11 @@ app2_ports_external = {
 app3_ports_external = {
   dev  = 3003
 }
+
+redis_ports_external = {
+  dev  = 6379
+}
+
+postgres_ports_external = {
+  dev  = 5432
+}
