@@ -1,0 +1,58 @@
+- name: Configurar NGINX proxy y apps
+  hosts: localhost
+  gather_facts: false
+  vars:
+    project_root: "{{ playbook_dir }}/.."
+    nginx_conf_host: "{{ project_root }}/h_volumes/nginx_conf"
+    app1_root_host: "{{ project_root }}/h_volumes/app1"
+    app2_root_host: "{{ project_root }}/h_volumes/app2"
+    app3_root_host: "{{ project_root }}/h_volumes/app3"
+    nginx_container: 'nginx-proxy'
+  
+  tasks:
+    - name: Crear directorios
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+        mode: '0755'
+      loop:
+        - "{{ nginx_conf_host }}"
+        - "{{ app1_root_host }}"
+        - "{{ app2_root_host }}"
+        - "{{ app3_root_host }}"
+      
+    - name: Copiar configuración de Nginx (proxy)
+      ansible.builtin.copy:
+        src: "templates/nginx.conf"
+        dest: "{{ nginx_conf_host }}/default.conf"
+        mode: '0644'
+
+    - name: Copiar index.html de app1
+      ansible.builtin.copy:
+        src: "files/app1/index.html"
+        dest: "{{ app1_root_host }}/index.html"
+        mode: '0644'
+
+    - name: Copiar index.html de app2
+      ansible.builtin.copy:
+        src: "files/app2/index.html"
+        dest: "{{ app2_root_host }}/index.html"
+        mode: '0644'
+
+    - name: Copiar index.html de app3
+      ansible.builtin.copy:
+        src: "files/app3/index.html"
+        dest: "{{ app3_root_host }}/index.html"
+        mode: '0644'
+
+    - name: Intentar recargar nginx
+      ansible.builtin.command:
+        docker exec {{ nginx_container }} nginx -s reload
+      register: reload_result
+      changed_when: reload_result.rc == 0
+      failed_when: false
+
+    - name: Reiniciar contenedor si no recargó
+      ansible.builtin.command:
+        docker restart {{ nginx_container }}
+      when: reload_result.rc != 0
