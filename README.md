@@ -1,4 +1,4 @@
-# **Proyecto Lab02**
+# **Proyecto Lab04**
 ### *Integrantes:*
 - Alfaro Loyola, Emilio
 - Saldarriaga Urquizo, Pedro
@@ -7,6 +7,9 @@
 - Colona Chavez, Fabricio
 
 # Comandos
+   ### Ingresar a la carpeta iac
+    cd iac
+   Para que puedas ejecutar los comandos de terraform en la carpeta iac.
    ### Inicializar el proyecto
     sudo terraform init
    ### Ver los workspaces existentes
@@ -20,12 +23,16 @@
     sudo terraform plan
    ### Aplicar Cambios
     sudo terraform apply
-   ### Verificamos los contenedores
-    sudo docker ps
-   ### Probar en el navegador
-    App1 → http://localhost:3001
-    App2 → http://localhost:3002
-    App3 → http://localhost:3003
-    Grafana → http://localhost:3004
    ### Destruir la infraestructura
     sudo terraform destroy
+   ### Verificamos los contenedores
+    sudo docker ps
+   ### Salir de carpeta iac
+    cd ..
+   ### Para configurar Nginx Proxy y copiar la configuración desde los templates:
+    sudo ansible-playbook -i inventory.ini playbook.yaml
+   ### Recargar configuración de Nginx en el contenedor proxy
+    sudo docker exec nginx-proxy nginx -s reload
+   ### Probar en el navegador
+    http://localhost:3000/app/
+   `CTRL + R` para refrescar la página
