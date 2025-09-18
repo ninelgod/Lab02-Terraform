@@ -29,8 +29,12 @@
     sudo docker ps
    ### Salir de carpeta iac
     cd ..
+   ### Entrar a la carpeta config
+    cd config
    ### Para configurar Nginx Proxy y copiar la configuración desde los templates:
     sudo ansible-playbook -i inventory.ini playbook.yaml
+   ### Salir de la carpeta config
+    cd ..
    ### Recargar configuración de Nginx en el contenedor proxy
     sudo docker exec nginx-proxy nginx -s reload
    ### Probar en el navegador
