@@ -23,12 +23,8 @@
     sudo terraform plan
    ### Aplicar Cambios
     sudo terraform apply
-   ### Destruir la infraestructura
-    sudo terraform destroy
    ### Verificamos los contenedores
     sudo docker ps
-   ### Salir de carpeta iac
-    cd ..
    ### Entrar a la carpeta config
     cd config
    ### Para configurar Nginx Proxy y copiar la configuración desde los templates:
